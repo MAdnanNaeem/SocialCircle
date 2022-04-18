@@ -1,14 +1,15 @@
 const asyncHandler = require("express-async-handler");
 
+// This Goal variable ve many mongoose mathods for CRUD in our DB..
+const Goal = require("../models/goalsmodel");
 // @desc     Get   goals
 // @route    GET  /api/goals
 // @access   Private
 
 // For err handling befr conn to db we used async promise and npm i express-async-handler
 const getGoals = asyncHandler(async (req, res) => {
-  res.status(200).json({
-    message: "Here is the list of goals.......",
-  });
+  const goals = await Goal.find();
+  res.status(200).json(goals);
 });
 
 // @desc       Set    goal
@@ -16,25 +17,35 @@ const getGoals = asyncHandler(async (req, res) => {
 // @access     Private
 
 const setGoal = asyncHandler(async (req, res) => {
-  if (!req.body.title) {
+  if (!req.body.text) {
     res.status(400);
-
     // express error handler
     throw new Error("Please ! fill all the title field");
   }
 
-  res.status(200).json({
-    message: "New goal has been created......",
+  const goal = await Goal.create({
+    text: req.body.text,
   });
+
+  res.status(200).json(goal);
 });
 
 // @desc       Update  goal
 // @route      PUT    /api/goals
 // @access     Private
 const updateGoal = asyncHandler(async (req, res) => {
-  res.status(200).json({
-    message: `Goal ${req.params.id} has been updated`,
+  const goal = await Goal.findById(req.params.id);
+
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal not found :( ... ");
+  }
+
+  const GoalUpdated = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
   });
+
+  res.status(200).json(GoalUpdated);
 });
 
 // @desc       Delete  goal
@@ -42,8 +53,16 @@ const updateGoal = asyncHandler(async (req, res) => {
 // @access     Private
 
 const deleteGoal = asyncHandler(async (req, res) => {
+  const goal = await Goal.findById(req.params.id);
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal is not Found :)");
+  }
+
+  await goal.remove();
+
   res.status(200).json({
-    message: `Goal ${req.params.id} has been deleted......`,
+    message: `This Goal ${req.params.id}  has been deleted :)`,
   });
 });
 

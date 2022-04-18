@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../../../Advanced-NodeJsExpress-MongoDB"
+		},
+		{
+			"path": "../../../Fyp landing Page"
+		},
+		{
+			"path": "../../../Liken-Store"
+		},
+		{
+			"path": "../../../LikenStore-Backend"
+		},
+		{
+			"path": "../../../LikenStore-FrontEnd"
+		},
+		{
+			"path": "../../../LikenStore-FullStack"
+		},
+		{
+			"path": "../.."
+		}
+	]
+}
