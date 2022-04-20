@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
 // This Goal variable ve many mongoose mathods for CRUD in our DB..
-const Goal = require("../models/goalsmodel");
+const Goal = require("../models/goalsModel");
 // @desc     Get   goals
 // @route    GET  /api/goals
 // @access   Private

@@ -14,7 +14,7 @@ app.use(express.json()); //for Jason Body{}
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/goals", require(`./routes/goalRoutes`));
-
+app.use("/api/users", require("./routes/userRoutes"));
 // It will overwrite the default express error handler...
 app.use(errorHandler);
 
